@@ -15,12 +15,10 @@ def run_cli():
         if argv[1].strip() == "verbose":
             verbose = True
 
-
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
     size = comm.Get_size()
     root = 0
-
 
     pool = Pool(comm, root, timeout=2, n_tries=10)
     pool.ready()
@@ -97,7 +95,7 @@ def test_timeout_gather_bcast():
     root = 0
 
     pool = Pool(comm, root, timeout=2, n_tries=10)
-    pool.advance_transaction_counter(600)
+    pool.advance_transaction_counter(700)
     pool.ready()
 
     # high-numbered ranks will "drop out" first
@@ -161,6 +159,9 @@ def test_timeout_gather_bcast():
         # is to be dropped from the communicator
         if n_data > 0:
             n_data -= 1
+
+    # Ensure that prior tests don't overlap with the next text
+    comm.barrier()
 
 
 if __name__ == "__main__":

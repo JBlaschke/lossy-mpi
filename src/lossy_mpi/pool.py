@@ -211,6 +211,18 @@ class Pool(TimeoutComm):
         self._exec_bcast_transaction(obj, recvbuf, failover, OperatorMode.LOWER)
         return recvbuf[0]
 
+    def allreduce(self, data, zero_contructor, reduce_op):
+        LOGGER.debug("Starting Allreduce", comm=self)
+
+        all_data = self.gather(data)
+        if self.is_root:
+            buf = zero_contructor(data)
+            reduce_op(buf, all_data)
+        else:
+            buf = None
+        reduced = self.bcast(buf)
+        return reduced
+
     def Barrier(self):
         """
         Barrier on all masked ranks -- excluding "dead ranks". Non-dead ranks

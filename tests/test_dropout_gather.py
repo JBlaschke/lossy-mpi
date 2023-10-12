@@ -21,7 +21,6 @@ def run_cli():
     root = 0
 
     pool = Pool(comm, root, timeout=2, n_tries=10)
-    pool.advance_transaction_counter(200)
     pool.ready()
 
     n_data = randint(1, 10)
@@ -87,6 +86,7 @@ def test_dropout_gather():
     root = 0
 
     pool = Pool(comm, root, timeout=2, n_tries=10)
+    pool.advance_transaction_counter(200)
     pool.ready()
 
     # high-numbered ranks will "drop out" first
@@ -132,6 +132,9 @@ def test_dropout_gather():
         # is to be dropped from the communicator
         if n_data > 0:
             n_data -= 1
+
+    # Ensure that prior tests don't overlap with the next text
+    comm.barrier()
 
 
 if __name__ == "__main__":

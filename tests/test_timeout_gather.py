@@ -88,7 +88,7 @@ def test_timeout_gather():
     root = 0
 
     pool = Pool(comm, root, timeout=2, n_tries=10)
-    pool.advance_transaction_counter(500)
+    pool.advance_transaction_counter(600)
     pool.ready()
 
     # high-numbered ranks will "drop out" first
@@ -97,8 +97,6 @@ def test_timeout_gather():
     mask_ref = [Status.READY]*size
 
     while True:
-        # logger.info(f"{n_iter=} {n_data=}", comm=comm)
-
         # simulate unexpected failure: if no more work, then stop responding
         # decide on current status (i.e. if current rank has data to send)
         # assume that rank 0 does not fail
@@ -134,7 +132,8 @@ def test_timeout_gather():
         if n_data > 0:
             n_data -= 1
 
-    # logger.info("DONE!", comm=comm)
+    # Ensure that prior tests don't overlap with the next text
+    comm.barrier()
 
 
 if __name__ == "__main__":

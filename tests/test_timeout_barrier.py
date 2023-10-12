@@ -5,6 +5,7 @@ import pytest
 from random import randint
 from sys import argv
 
+
 def run_cli():
     from lossy_mpi.pool import Pool, Status
     from mpi4py import MPI
@@ -74,7 +75,7 @@ def test_timeout_barrier():
     root = 0
 
     pool = Pool(comm, root, timeout=2, n_tries=10)
-    pool.advance_transaction_counter(400)
+    pool.advance_transaction_counter(500)
     pool.ready()
 
     # high-numbered ranks will "drop out" first
@@ -114,6 +115,7 @@ def test_timeout_barrier():
         pool.barrier()
         assert True
 
+    # Ensure that prior tests don't overlap with the next text
     comm.barrier()
 
 

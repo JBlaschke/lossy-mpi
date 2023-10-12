@@ -158,6 +158,9 @@ def test_dropout_gather_bcast():
         if n_data > 0:
             n_data -= 1
 
+    # Ensure that prior tests don't overlap with the next text
+    comm.barrier()
+
 
 if __name__ == "__main__":
     run_cli()
