@@ -212,12 +212,12 @@ class Pool(TimeoutComm):
         return recvbuf[0]
 
     def allreduce(self, data, zero_contructor, reduce_op):
-        LOGGER.debug("Starting Allreduce", comm=self)
+        LOGGER.debug("Starting allreduce", comm=self)
 
         all_data = self.gather(data)
         if self.is_root:
             buf = zero_contructor(data)
-            reduce_op(buf, all_data)
+            buf = reduce_op(buf, all_data)
         else:
             buf = None
         reduced = self.bcast(buf)
