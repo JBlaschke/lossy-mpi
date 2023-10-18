@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "lossy-mpi"
-version = "0.0.4"
+version = "0.0.5"
 description = ""
 dependencies = ["pytest-mpi ==0.6"]
 
