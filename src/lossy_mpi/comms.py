@@ -135,7 +135,6 @@ class TimeoutComm(object):
                         f"Tag mismatch for: {flag=} {status.tag=}, {tag=}", comm=self
                     )
                     if (i, req) not in self._rejected_req:
-                        LOGGER.info(f"{req=}")
                         self._rejected_req.append((i, req))
                 else:
                     try_ct += 1

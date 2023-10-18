@@ -17,26 +17,26 @@ def list_zero_constructor(ref):
 def reduce_sum(result, data):
     f = [d for d in data if d is not None]
     for d in f:
-        assert d.shape == result.shape
+        assert d.shape == result.shape, f"{d.shape} != {result.shape}"
         result += d
 
 
 def reduce_sub(result, data):
     f = [d for d in data if d is not None]
     for d in f:
-        assert d.shape == result.shape
+        assert d.shape == result.shape, f"{d.shape} != {result.shape}"
         result -= d
 
 
 def reduce_mul(result, data):
     f = [d for d in data if d is not None]
     for d in f:
-        assert d.shape == result.shape
+        assert d.shape == result.shape, f"{d.shape} != {result.shape}"
         result *= d
 
 
 def reduce_div(result, data):
     f = [d for d in data if d is not None]
     for d in f:
-        assert d.shape == result.shape
+        assert d.shape == result.shape, f"{d.shape} != {result.shape}"
         result *= d
