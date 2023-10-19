@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "lossy-mpi"
-version = "0.0.5"
-description = ""
+version = "0.1.0"
+description = "MPI Pool communicator that is toleration to rank failures"
 dependencies = ["pytest-mpi ==0.6"]
 
 [project.optional-dependencies]
